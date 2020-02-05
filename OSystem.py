@@ -3,21 +3,22 @@ while True:
     path = os.path.abspath('.')
     print(path, " $ ", sep='', end='')
     inputedMessage = input()
-    resultMessage = inputedMessage.rstrip().lstrip()
-    if resultMessage == '':
+    resultList = inputedMessage.rstrip().lstrip().split(" ")
+    resultDirection = resultList[0]
+    if resultDirection == '':
         pass
-    elif resultMessage == "ls":
-        print("_________________________")
-        print("|     NAME     |  SIZE  |")
-        print("—————————————————————————")
+    elif resultDirection == "ls":
+        print("_____________________________")
+        print("|      NAME      |   SIZE   |")
+        print("—————————————————————————————")
         for i in os.listdir(os.path.abspath('.')):
             fileSize = os.path.getsize(os.path.abspath('.')+"\\"+i)
-            print('| {:13s}| {:7s}|'.format(str(i), str(fileSize)))
-        print("—————————————————————————")
-    elif resultMessage == "exit" or resultMessage == "quit":
+            print('| {:15s}| {:9s}|'.format(str(i), str(fileSize)))
+        print("—————————————————————————————")
+    elif resultDirection == "exit" or resultDirection == "quit":
         break
-    elif resultMessage == "dir":
+    elif resultDirection == "dir":
         for i in os.listdir(os.path.abspath('.')):
             print(i)
     else:
-        print("Unknown object: ", inputedMessage, sep='')
+        print("Unknown direction:", resultDirection)
