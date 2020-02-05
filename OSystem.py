@@ -1,23 +1,34 @@
 import os
+
 while True:
     path = os.path.abspath('.')
-    print(path, " $ ", sep='', end='')
+    print(path, "$ ", end='')
     inputedMessage = input()
-    resultMessage = inputedMessage.rstrip().lstrip()
-    if resultMessage == '':
+    resultList = inputedMessage.rstrip().lstrip().split(" ")
+    resultDirection = resultList[0]
+    if resultDirection == '':
         pass
-    elif resultMessage == "ls":
-        print("_________________________")
-        print("|     NAME     |  SIZE  |")
-        print("—————————————————————————")
+    elif resultDirection == "ls":
+        print(" _______________________________")
+        print("|       NAME       |    SIZE    |")
+        print(" ———————————————————————————————")
         for i in os.listdir(os.path.abspath('.')):
-            fileSize = os.path.getsize(os.path.abspath('.')+"\\"+i)
-            print('| {:13s}| {:7s}|'.format(str(i), str(fileSize)))
-        print("—————————————————————————")
-    elif resultMessage == "exit" or resultMessage == "quit":
+            if os.path.isdir(os.path.abspath('.')+"\\"+i):
+                print('| {:17s}|   IS DIR   |'.format(i))
+            elif os.path.isfile(os.path.abspath('.')+"\\"+i):
+                fileSize = os.path.getsize(os.path.abspath('.')+"\\"+i)
+                if fileSize >= 1024:
+                    sizeString = '%.2f' % (fileSize/1024)+"KB"
+                elif fileSize >= 1024**2:
+                    sizeString = '%.2f' % (fileSize/(1024**2))+"MB"
+                elif fileSize >= 1024**3:
+                    sizeString = '%.1f' % (fileSize/(1024**3))+"GB"
+                print('| {:17s}| {:11s}|'.format(i, sizeString))
+        print(" ———————————————————————————————")
+    elif resultDirection == "exit" or resultDirection == "quit":
         break
-    elif resultMessage == "dir":
+    elif resultDirection == "dir":
         for i in os.listdir(os.path.abspath('.')):
             print(i)
     else:
-        print("Unknown object: ", inputedMessage, sep='')
+        print("Unknown direction:", resultDirection)
