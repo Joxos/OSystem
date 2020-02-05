@@ -9,7 +9,7 @@ while True:
     elif resultMessage == "ls":
         for i in os.listdir(os.path.abspath('.')):
             print(i)
-    elif resultMessage == "exit":
+    elif resultMessage == "exit" or resultMessage == "quit":
         break
     elif resultMessage == "dir":
         for i in os.listdir(os.path.abspath('.')):
