@@ -14,7 +14,7 @@ while True:
             fileSize = os.path.getsize(os.path.abspath('.')+"\\"+i)
             print('| {:13s}| {:7s}|'.format(str(i), str(fileSize)))
         print("—————————————————————————")
-    elif resultMessage == "exit":
+    elif resultMessage == "exit" or resultMessage == "quit":
         break
     elif resultMessage == "dir":
         for i in os.listdir(os.path.abspath('.')):
